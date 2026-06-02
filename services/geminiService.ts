@@ -15,7 +15,7 @@ export const getMusicRecommendations = async (answers: UserAnswers): Promise<Rec
     Ensure the songs are highly relevant and widely known.`;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-2.0-flash',
+    model: 'gemini-1.5-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -41,10 +41,6 @@ export const getMusicRecommendations = async (answers: UserAnswers): Promise<Rec
     }
   });
 
-  try {
-    return JSON.parse(response.text) as RecommendationResponse;
-  } catch (error) {
-    console.error("Failed to parse Gemini response:", error);
-    throw new Error("Could not fetch recommendations. Please try again.");
-  }
+  return JSON.parse(response.text) as RecommendationResponse;
 };
+

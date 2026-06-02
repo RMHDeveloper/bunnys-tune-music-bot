@@ -64,7 +64,11 @@ const App: React.FC = () => {
         setRecommendations(result.songs);
         setView('results');
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to load music suggestions.");
+        const raw = err instanceof Error ? err.message : String(err);
+        const is429 = raw.includes('429') || raw.includes('quota') || raw.includes('RESOURCE_EXHAUSTED');
+        setError(is429
+          ? "Too many requests — please wait a moment and try again."
+          : "Couldn't fetch recommendations. Please try again.");
         setView('quiz');
       }
     }
