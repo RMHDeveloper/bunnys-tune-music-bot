@@ -1,0 +1,6 @@
+{
+  "name": "Bunny's Tune Music Bot",
+  "description": "A smart music recommendation bot that suggests 5 songs based on your mood, language, and preferences using Gemini AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
