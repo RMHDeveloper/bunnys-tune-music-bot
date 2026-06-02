@@ -64,6 +64,7 @@ const App: React.FC = () => {
         setRecommendations(result.songs);
         setView('results');
       } catch (err) {
+        console.error("[App] getMusicRecommendations error:", err);
         const raw = err instanceof Error ? err.message : String(err);
         const is429 = raw.includes('429') || raw.includes('quota') || raw.includes('RESOURCE_EXHAUSTED');
         setError(is429
