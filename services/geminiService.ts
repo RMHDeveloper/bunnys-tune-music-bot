@@ -15,7 +15,7 @@ export const getMusicRecommendations = async (answers: UserAnswers): Promise<Rec
     Ensure the songs are highly relevant and widely known.`;
 
   const response = await ai.models.generateContent({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-2.0-flash',
     contents: prompt,
     config: {
       responseMimeType: "application/json",

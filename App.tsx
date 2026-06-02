@@ -204,16 +204,31 @@ const App: React.FC = () => {
             </React.Fragment>
           );
         })}
+        {error && (
+          <div className="animate-fade-in-up mt-4">
+            <ChatBubble message={`Oops! ${error} Tap below to try again.`} isBot={true} />
+            <div className="flex flex-wrap gap-3 mt-6 justify-start pl-2">
+              <Button
+                variant="outline"
+                size="md"
+                onClick={() => { setError(null); handleOptionSelect(answers[QUESTIONS[currentStep - 1].id as keyof UserAnswers] as string); }}
+                className="px-6 py-4 font-black text-sm uppercase tracking-wider shadow-sm bg-white border-[#4e342e]/10 hover:bg-[#4e342e] hover:text-white hover:border-transparent transition-all"
+              >
+                Try Again
+              </Button>
+            </div>
+          </div>
+        )}
         {!isLoading && !error && (
           <div className="animate-fade-in-up">
             <ChatBubble message={getQuestionText(currentStep)} isBot={true} />
             <div className="flex flex-wrap gap-3 mt-6 justify-start pl-2">
               {QUESTIONS[currentStep].options.map((option) => (
-                <Button 
-                  key={option} 
-                  variant="outline" 
-                  size="md" 
-                  onClick={() => handleOptionSelect(option)} 
+                <Button
+                  key={option}
+                  variant="outline"
+                  size="md"
+                  onClick={() => handleOptionSelect(option)}
                   className="px-6 py-4 font-black text-sm uppercase tracking-wider shadow-sm bg-white border-[#4e342e]/10 hover:bg-[#4e342e] hover:text-white hover:border-transparent transition-all"
                 >
                   {option}
