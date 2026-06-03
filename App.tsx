@@ -67,8 +67,11 @@ const App: React.FC = () => {
         console.error("[App] getMusicRecommendations error:", err);
         const raw = err instanceof Error ? err.message : String(err);
         const is429 = raw.includes('429') || raw.includes('quota') || raw.includes('RESOURCE_EXHAUSTED');
+        const is503 = raw.includes('503') || raw.includes('UNAVAILABLE') || raw.includes('high demand');
         setError(is429
           ? "Too many requests — please wait a moment and try again."
+          : is503
+          ? "Gemini is busy right now — please try again in a few seconds."
           : "Couldn't fetch recommendations. Please try again.");
         setView('quiz');
       }
